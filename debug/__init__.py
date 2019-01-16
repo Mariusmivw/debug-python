@@ -1,5 +1,5 @@
-from glob import exports
-from debug import module as debug
+from debug.globals import exports
+from debug.debug import module as debug
 from os import environ as env
 from sys import stdout
 from functools import reduce

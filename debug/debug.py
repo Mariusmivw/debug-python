@@ -9,7 +9,7 @@ from time import time
 from packages.ms import ms
 import re
 
-from glob import exports
+from debug.globals import exports
 
 module = {}
 
