@@ -6,5 +6,7 @@ setup(name='debug',
       author='Mariusmivw',
       license='MIT',
       packages=['debug'],
-      install_requires=['ms'],
+      dependency_links=[
+          'http://github.com/Mariusmivw/ms-python/tarball/master'
+      ],
       zip_safe=False)
