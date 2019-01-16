@@ -6,7 +6,7 @@
  '''
 
 from time import time
-from packages.ms import ms
+from ms import ms
 import re
 
 from debug.globals import exports

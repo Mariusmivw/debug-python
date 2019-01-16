@@ -5,9 +5,8 @@ from sys import stdout
 from functools import reduce
 import re
 import time
-module = {}
 
-exports = module = debug
+exports = debugger = debug
 
 # /**
 #  * Colors.
