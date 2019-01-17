@@ -41,7 +41,7 @@ def selectColor(namespace):
  '''
 
 
-def createDebug(namespace):
+def createDebug(namespace, onlyRepr=False):
     '''
      * Previous log timestamp.
      '''
@@ -100,20 +100,20 @@ def createDebug(namespace):
 
         re.sub(r'%([a-zA-Z%])', replacer, args[0])
         '''args[0] = args[0].replace(/%([a-zA-Z%])/g, function(match, format) {
-      # if we encounter an escaped % then don't increase the array index
-      if (match === '%%') return match;
-      index += 1;
-      var formatter = exports.formatters[format];
-      if ('function' === typeof formatter) {
-        var val = args[index];
-        match = formatter.call(self, val);
+        # if we encounter an escaped % then don't increase the array index
+        if (match === '%%') return match;
+        index += 1;
+        var formatter = exports.formatters[format];
+        if ('function' === typeof formatter) {
+            var val = args[index];
+            match = formatter.call(self, val);
 
-        # now we need to remove `args[index]` since it's inlined in the `format`
-        args.splice(index, 1);
-        index -= 1;
-      }
-      return match;
-    })'''
+            # now we need to remove `args[index]` since it's inlined in the `format`
+            args.splice(index, 1);
+            index -= 1;
+        }
+        return match;
+        })'''
 
         # apply env-specific formatting (colors, etc.)
         exports.formatArgs(self, args)
@@ -124,12 +124,17 @@ def createDebug(namespace):
         except:
             logFn = print
             pass
+
+        if (self.onlyRepr):
+            for i in range(len(args)):
+                args[i] = repr(args[i])
         logFn(args)
 
     debug.namespace = namespace
     debug.enabled = exports.enabled(namespace)
     debug.useColors = exports.useColors()
     debug.color = selectColor(namespace)
+    debug.onlyRepr = onlyRepr
 
     # env-specific initialization logic for debug instances
     if (callable(exports.init)):
