@@ -27,7 +27,6 @@ def reducer(obj, key):
 
     # // coerce string value into JS value
     val = env[key]
-    print(key, val)
     if (re.search(r'^(yes|on|true|enabled)$', val, re.IGNORECASE)):
         val = True
     elif (re.search(r'^(no|off|false|disabled)$', val, re.IGNORECASE)):
@@ -45,7 +44,6 @@ def reducer(obj, key):
 exports.inspectOpts = reduce(reducer, [key for key in list(
     env.keys()) if re.search(r'^debug_', key, re.IGNORECASE)], {})
 
-
 stream = stdout
 
 # /**
@@ -55,7 +53,7 @@ stream = stdout
 
 def useColors():
     if ('colors' in exports.inspectOpts):
-        return bool(exports.inspectOpts.colors)
+        return bool(exports.inspectOpts['colors'])
     else:
         return stdout.isatty()
 
